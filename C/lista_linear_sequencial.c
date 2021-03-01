@@ -8,7 +8,7 @@ typedef struct {
 } REGISTER;
 
 typedef struct {
-    REGISTER A[MAX];
+    REGISTER A[MAX + 1];
     int numberOfElements;
 } LIST;
 
@@ -17,6 +17,7 @@ int main() {
     int getSize(LIST* list);
     void showList(LIST* list);
     int sequentialSearch(LIST* list, TYPEKEY key);
+    int sentinelSearch(LIST* list, TYPEKEY key);
     int insertListElement(LIST* list, REGISTER reg, int index);
     int removeListElement(LIST* list, TYPEKEY key);
     void rebootList(LIST* list);
@@ -35,17 +36,17 @@ int main() {
     showList(&myList);
     printf("Size: %d\n\n", getSize(&myList));
 
-    printf("10 is %d\n", sequentialSearch(&myList, 10));
-    printf("15 is %d\n", sequentialSearch(&myList, 15));
-    printf("20 is %d\n\n\n", sequentialSearch(&myList, 20));
+    printf("10 is %d\n", sentinelSearch(&myList, 10));
+    printf("15 is %d\n", sentinelSearch(&myList, 15));
+    printf("20 is %d\n\n\n", sentinelSearch(&myList, 20));
 
     removeListElement(&myList, 10);
 
     showList(&myList);
     printf("Size: %d\n\n", getSize(&myList));
 
-    printf("10 is %d\n", sequentialSearch(&myList, 10));
-    printf("20 is %d\n\n\n", sequentialSearch(&myList, 20));
+    printf("10 is %d\n", sentinelSearch(&myList, 10));
+    printf("20 is %d\n\n\n", sentinelSearch(&myList, 20));
 
     rebootList(&myList);
 
@@ -85,6 +86,22 @@ int sequentialSearch(LIST* list, TYPEKEY key) {
     }
 
     return -1;
+}
+
+int sentinelSearch(LIST* list, TYPEKEY key) {
+    int i = 0;
+
+    list->A[list->numberOfElements].key = key;
+
+    while (list->A[i].key != key) {
+        i++;
+    }
+
+    if (i == list->numberOfElements) {
+        return -1;
+    } else {
+        return i;
+    }
 }
 
 int insertListElement(LIST* list, REGISTER reg, int index) {

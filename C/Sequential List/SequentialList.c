@@ -80,6 +80,22 @@ int insertListElement(LIST* list, REGISTER reg, int index) {
     return 1;
 }
 
+int insertOrderedListElement(LIST* list, REGISTER reg) {
+    if (list->numberOfElements >= MAX) {
+        return 0;
+    }
+
+    int pos = list->numberOfElements;
+
+    while (pos > 0 && list->A[pos - 1].key > reg.key) {
+        list->A[pos] = list->A[pos - 1];
+        pos--;
+    }
+
+    list->A[pos] = reg;
+    list->numberOfElements++;
+    return 1;
+}
 
 int removeListElement(LIST* list, TYPEKEY key) {
 
@@ -95,8 +111,8 @@ int removeListElement(LIST* list, TYPEKEY key) {
         return 0;
     }
 
-    for (int j = index; j < list->numberOfElements; j++) {
-        list->A[j - 1] = list->A[j];
+    for (int j = index; j < list->numberOfElements - 1; j++) {
+        list->A[j] = list->A[j + 1];
     }
 
     list->numberOfElements--;

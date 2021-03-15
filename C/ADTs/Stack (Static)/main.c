@@ -22,6 +22,7 @@ int main()
     }
     printf("\n");
 
+    destroy(p);
 
     return 0;
 }

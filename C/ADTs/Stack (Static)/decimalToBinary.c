@@ -33,6 +33,7 @@ int main()
     }
     printf("\n"); 
 
-    
+    destroy(binaries);
+
     return 0;
 }

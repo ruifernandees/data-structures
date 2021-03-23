@@ -99,7 +99,7 @@ int top(tStack *p, void *elem)
         return 0;
     }
 
-    memcpy(elem, p->top, p->elementSize);
+    memcpy(elem, p->top->item, p->elementSize);
 
     return 1;
 }

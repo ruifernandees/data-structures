@@ -21,6 +21,8 @@ int main()
 
     printf("Stack size: %d\n", stackSize(p));
 
+    top(p, &myPoint);
+    printf("Top: (%d, %d)\n ", myPoint.x, myPoint.y);
     while (!isEmpty(p))
     {
         pop(p, &myPoint);
